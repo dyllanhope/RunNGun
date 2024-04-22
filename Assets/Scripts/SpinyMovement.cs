@@ -24,7 +24,7 @@ public class SpinyMovement : MonoBehaviour
         Move();
         FaceMouse();
     }
-    //this is a test comment
+
     void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
