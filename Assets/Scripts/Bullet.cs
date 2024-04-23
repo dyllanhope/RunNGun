@@ -42,8 +42,11 @@ public class Bullet : MonoBehaviour
         }
         if (collision.gameObject.tag == "Wall")
         {
-            //you're working on the particles. They just aren't playing for some reason
-            wallHitParticles.Play();
+            //trigger particle system on wall hit
+            ParticleSystem instance = Instantiate(wallHitParticles, transform.position, Quaternion.identity);
+            instance.Play();
+            Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
+
             Destroy(gameObject);
         }
     }
