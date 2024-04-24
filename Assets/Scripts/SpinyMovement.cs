@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,13 +42,8 @@ public class SpinyMovement : MonoBehaviour
 
     void FaceMouse()
     {
-        // Get the mouse position in world coordinates
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f; // Ensure the z-coordinate is 0 since we're working in 2D
-
-        // Calculate the direction to look at
-        Vector3 lookDir = mousePos - transform.position;
-
+        // Get the mouse position in world coordinates and subtract the position of Spiny for the direction vector
+        Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         // Calculate the angle in degrees
         float facingAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
@@ -73,6 +69,11 @@ public class SpinyMovement : MonoBehaviour
                 firingCoroutine = null;
             }
         }
+    }
+
+    public Vector3 GetPlayerPos()
+    {
+        return transform.position;
     }
 
     IEnumerator FireBullets()
