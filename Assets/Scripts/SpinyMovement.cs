@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,6 +69,11 @@ public class SpinyMovement : MonoBehaviour
                 firingCoroutine = null;
             }
         }
+    }
+
+    public Vector3 GetPlayerPos()
+    {
+        return transform.position;
     }
 
     IEnumerator FireBullets()
