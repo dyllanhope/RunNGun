@@ -6,7 +6,10 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] int touchDamage = 5;
+    [SerializeField] float touchDamageTime = 1;
     SpinyMovement player;
+    bool isTouchingPlayer = false;
     void Awake()
     {
         player = FindObjectOfType<SpinyMovement>();
@@ -17,6 +20,35 @@ public class EnemyMovement : MonoBehaviour
     }
     void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.GetPlayerPos(), moveSpeed * Time.deltaTime);
+        if (player != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.GetPlayerPos(), moveSpeed * Time.deltaTime);
+        }
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            isTouchingPlayer = true;
+            StartCoroutine(CheckTouchingPlayer(collision));
+        }
+    }
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            isTouchingPlayer = false;
+        }
+    }
+    IEnumerator CheckTouchingPlayer(Collision2D collision)
+    {
+        do
+        {
+            collision.gameObject.GetComponent<HealthManager>().TakeDamage(touchDamage);
+            yield return new WaitForSeconds(touchDamageTime);
+
+        } while (isTouchingPlayer == true);
+
+        yield return null;
     }
 }
