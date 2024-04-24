@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float bulletSpeed = 10.0f;
+    [SerializeField] int bulletDamage = 10;
+
     [SerializeField] ParticleSystem wallHitParticles;
 
     Rigidbody2D myRigidBody;
@@ -38,7 +40,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<HealthManager>().TakeDamage(bulletDamage);
         }
         if (collision.gameObject.tag == "Wall")
         {
@@ -46,8 +48,7 @@ public class Bullet : MonoBehaviour
             ParticleSystem instance = Instantiate(wallHitParticles, transform.position, Quaternion.identity);
             instance.Play();
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
-
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

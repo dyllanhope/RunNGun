@@ -98,9 +98,10 @@ GameObject:
   - component: {fileID: 1355489202286402159}
   - component: {fileID: 5903803437996438560}
   - component: {fileID: 1652882076428418094}
+  - component: {fileID: 1936723871492660549}
   m_Layer: 8
   m_Name: Spiny
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,6 +282,19 @@ MonoBehaviour:
   movementSpeed: 10
   bullet: {fileID: 2513759553635569543, guid: d5e7f9ffeac6b9b47a9d703b7b2e0055, type: 3}
   bulletDelay: 0.2
+--- !u!114 &1936723871492660549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570572621244797038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed78c83f10284c94593ff6c5c5f53556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
 --- !u!1 &9184825493254862084
 GameObject:
   m_ObjectHideFlags: 0
