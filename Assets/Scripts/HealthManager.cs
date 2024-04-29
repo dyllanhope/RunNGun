@@ -5,6 +5,13 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     [SerializeField] int health = 50;
+    [SerializeField] bool isEnemy = true;
+
+    GameManager gameManager;
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     public void TakeDamage(int damage)
     {
@@ -16,6 +23,8 @@ public class HealthManager : MonoBehaviour
     }
     void Die()
     {
+        if (isEnemy)
+        { gameManager.KillEnemy(); }
         Destroy(gameObject);
     }
 }
