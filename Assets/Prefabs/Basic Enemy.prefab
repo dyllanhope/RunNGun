@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 3818217859715190831}
   - component: {fileID: 5622367327528348259}
   - component: {fileID: 3366066941856012581}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8991277318958733084}
   - component: {fileID: 1667971107636275341}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
