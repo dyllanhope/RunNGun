@@ -5154,6 +5154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5019dc2099a9c4eb2dded3047da241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 238301075}
+  enemyCountText: {fileID: 131779610}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -15957,7 +15959,7 @@ GameObject:
   - component: {fileID: 1007750894}
   - component: {fileID: 1007750893}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: ScoreCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
