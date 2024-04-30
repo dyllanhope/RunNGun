@@ -6,6 +6,7 @@ public class HealthManager : MonoBehaviour
 {
     [SerializeField] int health = 50;
     [SerializeField] bool isEnemy = true;
+    [SerializeField] int points = 20;
 
     GameManager gameManager;
     private void Awake()
@@ -24,7 +25,10 @@ public class HealthManager : MonoBehaviour
     void Die()
     {
         if (isEnemy)
-        { gameManager.KillEnemy(); }
+        { 
+            gameManager.KillEnemy();
+            gameManager.IncreaseScore(points);
+        }
         Destroy(gameObject);
     }
 }
