@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   isEnemy: 1
+  points: 20
+  deathParticles: {fileID: 951656456598312523, guid: 50f5263b0cc678f4ab0ae28c236206c9, type: 3}
 --- !u!1 &6466780554511683286
 GameObject:
   m_ObjectHideFlags: 0
