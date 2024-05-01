@@ -297,6 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   isEnemy: 0
+  healthSlider: {fileID: 1192886892308673029, guid: 40468dc906a1965418fb0f320831955b, type: 3}
   points: 0
   deathParticles: {fileID: 0}
 --- !u!114 &6311878393152883115
