@@ -1,13 +1,16 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] int health = 50;
     [SerializeField] bool isEnemy = true;
+    [SerializeField] Slider healthSlider;
 
     [Header("Points")]
     [SerializeField] int points = 20;
@@ -24,6 +27,14 @@ public class HealthManager : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
+    private void Start()
+    {
+        if (!isEnemy)
+        {
+            healthSlider.maxValue = health;
+            healthSlider.value = health;
+        }
+    }
 
     public void TakeDamage(int damage)
     {
@@ -32,11 +43,16 @@ public class HealthManager : MonoBehaviour
         {
             Die();
         }
+
+        if (!isEnemy)
+        {
+            healthSlider.value = health;
+        }
     }
     void Die()
     {
         if (isEnemy)
-        { 
+        {
             gameManager.KillEnemy();
             gameManager.IncreaseScore(points);
             PlayDeathParticles();
@@ -52,6 +68,6 @@ public class HealthManager : MonoBehaviour
     {
         var instance = Instantiate(deathParticles, transform.position, Quaternion.identity);
         instance.Play();
-        Destroy(instance, deathParticles.main.duration + deathParticles.main.startLifetime.constantMax);
+        Destroy(instance, instance.main.duration + instance.main.startLifetime.constantMax);
     }
 }
