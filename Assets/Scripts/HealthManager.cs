@@ -66,8 +66,8 @@ public class HealthManager : MonoBehaviour
 
     void PlayDeathParticles()
     {
-        var instance = Instantiate(deathParticles, transform.position, Quaternion.identity);
+        ParticleSystem instance = Instantiate(deathParticles, transform.position, Quaternion.identity);
         instance.Play();
-        Destroy(instance, instance.main.duration + instance.main.startLifetime.constantMax);
+        Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
     }
 }
