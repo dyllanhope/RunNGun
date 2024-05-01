@@ -14,16 +14,24 @@ public class Bullet : MonoBehaviour
 
     Vector3 bulletDirection;
 
-    void Start()
+    PowerUpManager powerUpManager;
+    private void Awake()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         spinyMovement = FindObjectOfType<SpinyMovement>();
+
+        powerUpManager = FindObjectOfType<PowerUpManager>();
+    }
+    void Start()
+    {
         myRigidBody.transform.position = spinyMovement.transform.position;
         bulletDirection = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
 
         // Calculate the rotation angle based on the direction vector
         float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
+
+        SetBulletSize();
     }
 
     void Update()
@@ -50,5 +58,10 @@ public class Bullet : MonoBehaviour
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
         Destroy(gameObject);
+    }
+
+    void SetBulletSize()
+    {
+        gameObject.transform.localScale = new Vector2(transform.localScale.x * powerUpManager.GetBulletSizeMultiplier(), transform.localScale.y * powerUpManager.GetBulletSizeMultiplier());
     }
 }

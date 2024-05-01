@@ -20,7 +20,7 @@ TagManager:
   - Player
   - Bullet
   - Enemy
-  - 
+  - Items
   - 
   - 
   - 
@@ -51,14 +51,17 @@ TagManager:
   - name: Wall
     uniqueID: 4139330223
     locked: 0
+  - name: Items
+    uniqueID: 1423559993
+    locked: 0
   - name: Enemy
     uniqueID: 1765585777
     locked: 0
-  - name: Player
-    uniqueID: 396622271
-    locked: 0
   - name: Bullet
     uniqueID: 875524169
+    locked: 0
+  - name: Player
+    uniqueID: 396622271
     locked: 0
   - name: Particles
     uniqueID: 2169197759
