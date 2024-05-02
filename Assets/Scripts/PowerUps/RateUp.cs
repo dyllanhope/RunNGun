@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class RateUp : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float fireRateTime;
+
+    PowerUpManager powerUpManager;
+
+    private void Awake()
     {
-        
+        powerUpManager = FindObjectOfType<PowerUpManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        powerUpManager.DecreaseFireRateTime(fireRateTime);
     }
 }
