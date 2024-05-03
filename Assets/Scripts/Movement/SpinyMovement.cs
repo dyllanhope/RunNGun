@@ -12,9 +12,16 @@ public class SpinyMovement : MonoBehaviour
 
     Rigidbody2D myRigidBody2D;
     Vector2 moveInput;
+    float facingAngle;
+
+    PowerUpManager powerUpManager;
+
+    [Header("Firing Bullet")]
     bool isFiring = false;
     Coroutine firingCoroutine;
-    PowerUpManager powerUpManager;
+    public Transform firePoint;
+    public int numberOfBullets = 3;
+    public float spreadAngle = 90f;
 
     void Awake()
     {
@@ -53,7 +60,7 @@ public class SpinyMovement : MonoBehaviour
         // Get the mouse position in world coordinates and subtract the position of Spiny for the direction vector
         Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         // Calculate the angle in degrees
-        float facingAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        facingAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
         // Rotate the Rigidbody2D to face the mouse
         myRigidBody2D.rotation = facingAngle;
@@ -88,7 +95,33 @@ public class SpinyMovement : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            float startAngle = 0f /*facingAngle - spreadAngle / 2*/;
+            float angleStep = spreadAngle / (numberOfBullets);
+
+            for (var i = 0; i < numberOfBullets; i++)
+            {
+                //float angle = startAngle + i * angleStep;
+                //Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+                //Vector3 direction = rotation * transform.forward;
+
+                //GameObject bulletFired = Instantiate(bullet, transform.position, Quaternion.identity);
+                ////bulletFired.GetComponent<Bullet>().SetBulletDirection(direction);
+                //Rigidbody2D bulletRB = bulletFired.GetComponent<Rigidbody2D>();
+                //if (bulletRB != null)
+                //{
+                //    bulletRB.velocity = direction.normalized * 15;
+                //    Debug.Log(bulletRB.velocity);
+                //}
+                float projectileDirXPosition = transform.position.x + Mathf.Sin((startAngle * Mathf.PI) / 45) * 1f;
+                float projectileDirYPosition = transform.position.y + Mathf.Cos((startAngle * Mathf.PI) / 45) * 1f;
+                Vector3 projectileVector = new Vector3(projectileDirXPosition, projectileDirYPosition, 0);
+                Vector3 projectileMoveDirection = (projectileVector - transform.position).normalized * 10;
+
+                GameObject bulletFired = Instantiate(bullet, transform.position, Quaternion.identity);
+                bulletFired.GetComponent<Rigidbody2D>().velocity = new Vector3(projectileMoveDirection.x, 0, projectileMoveDirection.y);
+
+                startAngle += angleStep;
+            }
             yield return new WaitForSeconds(bulletDelay);
         }
     }

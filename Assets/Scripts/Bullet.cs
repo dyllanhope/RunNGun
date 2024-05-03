@@ -25,24 +25,29 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         myRigidBody.transform.position = spinyMovement.transform.position;
-        bulletDirection = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
+        //bulletDirection = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
 
         // Calculate the rotation angle based on the direction vector
-        float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
+        //float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 
         SetBulletSize();
     }
 
-    void Update()
-    {
-        Move();
-    }
+    //void Update()
+    //{
+    //    Move();
+    //}
 
-    void Move()
-    {
-        myRigidBody.velocity = bulletDirection * bulletSpeed;
-    }
+    //void Move()
+    //{
+    //    myRigidBody.velocity = bulletDirection * bulletSpeed;
+    //}
+
+    //public void SetBulletDirection(Vector3 direction)
+    //{
+    //    bulletDirection = direction;
+    //}
 
     void OnTriggerEnter2D(Collider2D collision)
     {

@@ -8,7 +8,9 @@ public class PowerUpManager : MonoBehaviour
 
     float bulletSizeMultiplier = 1f;
     float fireRateTime = 0f;
+    int bulletCount = 1;
 
+    #region Bullet size Code
     public void IncreaseBulletSizeMultiplier(float addedMultiplier)
     {
         bulletSizeMultiplier += addedMultiplier;
@@ -18,7 +20,9 @@ public class PowerUpManager : MonoBehaviour
     {
         return bulletSizeMultiplier;
     }
+    #endregion
 
+    #region Fire Rate Code
     public void SetInitialFireRate(float initialFireRate)
     {
         fireRateTime = initialFireRate;
@@ -36,4 +40,12 @@ public class PowerUpManager : MonoBehaviour
     {
         return fireRateTime;
     }
+    #endregion
+
+    #region Bullet count Code
+    public int increaseBulletCount()
+    {
+        return bulletCount++;
+    }
+    #endregion
 }
