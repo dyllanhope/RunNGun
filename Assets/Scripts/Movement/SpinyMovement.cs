@@ -95,33 +95,51 @@ public class SpinyMovement : MonoBehaviour
     {
         while (true)
         {
-            float startAngle = 0f /*facingAngle - spreadAngle / 2*/;
-            float angleStep = spreadAngle / (numberOfBullets);
+            //float startAngle = 0f /*facingAngle - spreadAngle / 2*/;
+            //float angleStep = spreadAngle / (numberOfBullets);
 
-            for (var i = 0; i < numberOfBullets; i++)
+            float angleStep = spreadAngle / numberOfBullets;
+            float aimingAngle = facingAngle + 90;
+            float centeringOffset = (spreadAngle / 2) - (angleStep / 2); //offsets every projectile so the spread is  
+
+            //centered on the mouse cursor
+
+            for (int i = 0; i < numberOfBullets; i++)
             {
-                //float angle = startAngle + i * angleStep;
-                //Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
-                //Vector3 direction = rotation * transform.forward;
+                float currentBulletAngle = angleStep * i;
 
-                //GameObject bulletFired = Instantiate(bullet, transform.position, Quaternion.identity);
-                ////bulletFired.GetComponent<Bullet>().SetBulletDirection(direction);
-                //Rigidbody2D bulletRB = bulletFired.GetComponent<Rigidbody2D>();
-                //if (bulletRB != null)
-                //{
-                //    bulletRB.velocity = direction.normalized * 15;
-                //    Debug.Log(bulletRB.velocity);
-                //}
-                float projectileDirXPosition = transform.position.x + Mathf.Sin((startAngle * Mathf.PI) / 45) * 1f;
-                float projectileDirYPosition = transform.position.y + Mathf.Cos((startAngle * Mathf.PI) / 45) * 1f;
-                Vector3 projectileVector = new Vector3(projectileDirXPosition, projectileDirYPosition, 0);
-                Vector3 projectileMoveDirection = (projectileVector - transform.position).normalized * 10;
+                Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, aimingAngle + currentBulletAngle - centeringOffset));
+                GameObject bulletFired = Instantiate(bullet, transform.position, rotation);
 
-                GameObject bulletFired = Instantiate(bullet, transform.position, Quaternion.identity);
-                bulletFired.GetComponent<Rigidbody2D>().velocity = new Vector3(projectileMoveDirection.x, 0, projectileMoveDirection.y);
-
-                startAngle += angleStep;
+                Rigidbody2D rb = bulletFired.GetComponent<Rigidbody2D>();
+                rb.AddForce(bulletFired.transform.right * 15, ForceMode2D.Impulse);
             }
+            //for (var i = 0; i < numberOfBullets; i++)
+            //{
+            //float angle = startAngle + i * angleStep;
+            //Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            //Vector3 direction = rotation * transform.forward;
+
+            //GameObject bulletFired = Instantiate(bullet, transform.position, Quaternion.identity);
+            ////bulletFired.GetComponent<Bullet>().SetBulletDirection(direction);
+            //Rigidbody2D bulletRB = bulletFired.GetComponent<Rigidbody2D>();
+            //if (bulletRB != null)
+            //{
+            //    bulletRB.velocity = direction.normalized * 15;
+            //    Debug.Log(bulletRB.velocity);
+            //}
+
+
+            //float projectileDirXPosition = transform.position.x + Mathf.Sin((startAngle * Mathf.PI) / 45) * 1f;
+            //float projectileDirYPosition = transform.position.y + Mathf.Cos((startAngle * Mathf.PI) / 45) * 1f;
+            //Vector3 projectileVector = new Vector3(projectileDirXPosition, projectileDirYPosition, 0);
+            //Vector3 projectileMoveDirection = (projectileVector - transform.position).normalized * 10; // bullet speed
+
+            //GameObject bulletFired = Instantiate(bullet, transform.position, Quaternion.identity);
+            //bulletFired.GetComponent<Rigidbody2D>().velocity = new Vector3(projectileMoveDirection.x, 0, projectileMoveDirection.y);
+
+            //startAngle += angleStep;
+            //}
             yield return new WaitForSeconds(bulletDelay);
         }
     }
