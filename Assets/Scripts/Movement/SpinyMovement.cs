@@ -14,14 +14,22 @@ public class SpinyMovement : MonoBehaviour
     Vector2 moveInput;
     bool isFiring = false;
     Coroutine firingCoroutine;
+    PowerUpManager powerUpManager;
 
     void Awake()
     {
         myRigidBody2D = GetComponent<Rigidbody2D>();
+        powerUpManager = FindObjectOfType<PowerUpManager>();
+    }
+
+    private void Start()
+    {
+        powerUpManager.SetInitialFireRate(bulletDelay);
     }
 
     void FixedUpdate()
     {
+        bulletDelay = powerUpManager.GetFireRateTime();
         Move();
         FaceMouse();
     }

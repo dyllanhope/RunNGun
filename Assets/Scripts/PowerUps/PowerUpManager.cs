@@ -19,9 +19,17 @@ public class PowerUpManager : MonoBehaviour
         return bulletSizeMultiplier;
     }
 
-    public void DecreaseFireRateTime(float fireRateTime)
+    public void SetInitialFireRate(float initialFireRate)
     {
-        fireRateTime -= fireRateTime;
+        fireRateTime = initialFireRate;
+    }
+
+    public void DecreaseFireRateTime(float fireRateDecrease)
+    {
+        if (fireRateTime > 0)
+        {
+            fireRateTime -= fireRateDecrease;
+        }
     }
 
     public float GetFireRateTime()

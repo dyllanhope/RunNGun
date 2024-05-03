@@ -16163,6 +16163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpList:
   - {fileID: 1178355875686844420, guid: 0c065bed64addf54294b9c05a5f6ea85, type: 3}
+  - {fileID: 947695294}
 --- !u!4 &747137297
 Transform:
   m_ObjectHideFlags: 0
@@ -16178,6 +16179,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &947695294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1178355875686844420, guid: 15f3dff6400de594686bd28d37f5f188, type: 3}
+  m_PrefabInstance: {fileID: 1336982304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1007750892
 GameObject:
   m_ObjectHideFlags: 0
@@ -16293,6 +16299,10 @@ PrefabInstance:
     - target: {fileID: 1178355875686844420, guid: 15f3dff6400de594686bd28d37f5f188, type: 3}
       propertyPath: m_Name
       value: Rate PowerUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955294454704830048, guid: 15f3dff6400de594686bd28d37f5f188, type: 3}
+      propertyPath: fireRateTime
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8282326954921694326, guid: 15f3dff6400de594686bd28d37f5f188, type: 3}
       propertyPath: m_LocalPosition.x
