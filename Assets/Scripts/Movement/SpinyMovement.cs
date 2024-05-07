@@ -12,16 +12,30 @@ public class SpinyMovement : MonoBehaviour
 
     Rigidbody2D myRigidBody2D;
     Vector2 moveInput;
+    float facingAngle;
+
+    PowerUpManager powerUpManager;
+
+    [Header("Firing Bullet")]
     bool isFiring = false;
     Coroutine firingCoroutine;
+    public Transform firePoint;
+    public float spreadAngle = 90f;
 
     void Awake()
     {
         myRigidBody2D = GetComponent<Rigidbody2D>();
+        powerUpManager = FindObjectOfType<PowerUpManager>();
+    }
+
+    private void Start()
+    {
+        powerUpManager.SetInitialFireRate(bulletDelay);
     }
 
     void FixedUpdate()
     {
+        bulletDelay = powerUpManager.GetFireRateTime();
         Move();
         FaceMouse();
     }
@@ -45,7 +59,7 @@ public class SpinyMovement : MonoBehaviour
         // Get the mouse position in world coordinates and subtract the position of Spiny for the direction vector
         Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         // Calculate the angle in degrees
-        float facingAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        facingAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
         // Rotate the Rigidbody2D to face the mouse
         myRigidBody2D.rotation = facingAngle;
@@ -80,7 +94,19 @@ public class SpinyMovement : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            var numberOfBullets = powerUpManager.GetBulletCount();
+            float angleStep = spreadAngle / numberOfBullets;
+            float aimingAngle = facingAngle + 90;
+            float centeringOffset = (spreadAngle / 2) - (angleStep / 2); //offsets every projectile so the spread is  
+
+            for (int i = 0; i < numberOfBullets; i++)
+            {
+                float currentBulletAngle = angleStep * i;
+
+                Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, aimingAngle + currentBulletAngle - centeringOffset));
+                GameObject bulletFired = Instantiate(bullet, transform.position, rotation);
+                bulletFired.GetComponent<Bullet>().bulletDirection = rotation * Vector2.down;
+            }
             yield return new WaitForSeconds(bulletDelay);
         }
     }

@@ -12,18 +12,21 @@ public class Bullet : MonoBehaviour
     Rigidbody2D myRigidBody;
     SpinyMovement spinyMovement;
 
-    Vector3 bulletDirection;
+    public Vector3 bulletDirection { get; set; }
 
-    void Start()
+    PowerUpManager powerUpManager;
+    private void Awake()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         spinyMovement = FindObjectOfType<SpinyMovement>();
-        myRigidBody.transform.position = spinyMovement.transform.position;
-        bulletDirection = (Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position)).normalized;
 
-        // Calculate the rotation angle based on the direction vector
-        float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
+        powerUpManager = FindObjectOfType<PowerUpManager>();
+    }
+    void Start()
+    {
+        myRigidBody.transform.position = spinyMovement.transform.position;
+
+        SetBulletSize();
     }
 
     void Update()
@@ -34,6 +37,11 @@ public class Bullet : MonoBehaviour
     void Move()
     {
         myRigidBody.velocity = bulletDirection * bulletSpeed;
+    }
+
+    public void SetBulletDirection(Vector3 direction)
+    {
+        bulletDirection = direction;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -50,5 +58,10 @@ public class Bullet : MonoBehaviour
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
         Destroy(gameObject);
+    }
+
+    void SetBulletSize()
+    {
+        gameObject.transform.localScale = new Vector2(transform.localScale.x * powerUpManager.GetBulletSizeMultiplier(), transform.localScale.y * powerUpManager.GetBulletSizeMultiplier());
     }
 }
