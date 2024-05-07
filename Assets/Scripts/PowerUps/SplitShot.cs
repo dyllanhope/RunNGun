@@ -14,5 +14,6 @@ public class SplitShot : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         powerUpManager.increaseBulletCount(bulletIncreaseRate);
+        Destroy(gameObject);
     }
 }

@@ -53,4 +53,10 @@ public class PowerUpManager : MonoBehaviour
         return bulletCount;
     }
     #endregion
+
+    public void SpawnRandomPowerUp()
+    {
+        var randomIndex = Random.Range(0, powerUpList.Count);
+        Instantiate(powerUpList[randomIndex], transform.position, Quaternion.identity);
+    }
 }

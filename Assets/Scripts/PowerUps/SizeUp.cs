@@ -15,5 +15,6 @@ public class SizeUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         powerUpManager.IncreaseBulletSizeMultiplier(sizeMultiplier);
+        Destroy(gameObject);
     }
 }

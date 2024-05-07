@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     int currentScore = 0;
 
+    int currentWave = 0;
+
     public int GetEnemyCount()
     {
         return enemyCount;
@@ -38,5 +40,13 @@ public class GameManager : MonoBehaviour
     public int GetCurrentScore()
     {
         return currentScore;
+    }
+    public void IncreaseCurrentWave()
+    {
+        currentWave++;
+    }
+    public int GetCurrentWave()
+    {
+        return currentWave;
     }
 }

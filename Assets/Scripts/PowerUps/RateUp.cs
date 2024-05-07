@@ -16,5 +16,6 @@ public class RateUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         powerUpManager.DecreaseFireRateTime(fireRateTime);
+        Destroy(gameObject);
     }
 }
