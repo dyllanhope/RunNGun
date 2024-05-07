@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 2250544850459016789}
   - component: {fileID: 5027323527095353630}
   - component: {fileID: 2279809414055699994}
+  - component: {fileID: 1299491289086569101}
   m_Layer: 11
   m_Name: Split Shot PowerUp
   m_TagString: Untagged
@@ -265,6 +266,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1299491289086569101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178355875686844420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c752f919af78e545ab34a60d2065af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2357233934043167981
 GameObject:
   m_ObjectHideFlags: 0

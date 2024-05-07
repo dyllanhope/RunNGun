@@ -43,9 +43,14 @@ public class PowerUpManager : MonoBehaviour
     #endregion
 
     #region Bullet count Code
-    public int increaseBulletCount()
+    public void increaseBulletCount(int amount)
     {
-        return bulletCount++;
+        bulletCount += amount;
+    }
+
+    public int GetBulletCount()
+    {
+        return bulletCount;
     }
     #endregion
 }

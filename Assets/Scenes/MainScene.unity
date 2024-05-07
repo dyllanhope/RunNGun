@@ -16164,6 +16164,7 @@ MonoBehaviour:
   powerUpList:
   - {fileID: 1178355875686844420, guid: 0c065bed64addf54294b9c05a5f6ea85, type: 3}
   - {fileID: 947695294}
+  - {fileID: 1131115418}
 --- !u!4 &747137297
 Transform:
   m_ObjectHideFlags: 0
@@ -16288,6 +16289,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1131115418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1178355875686844420, guid: 9c5e1060a3d96784b9340585c73470a2, type: 3}
+  m_PrefabInstance: {fileID: 1952219352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1336982304
 PrefabInstance:
   m_ObjectHideFlags: 0
