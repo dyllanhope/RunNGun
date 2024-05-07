@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseScore(int points)
     {
         currentScore += points;
-        scoreText.text = "Score: " + currentScore.ToString("0000");
+        scoreText.text = "Score: " + currentScore.ToString("00000");
     }
 
     public int GetCurrentScore()

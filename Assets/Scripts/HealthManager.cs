@@ -37,13 +37,17 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    private void Update()
     {
-        health -= damage;
         if (health <= 0)
         {
             Die();
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
 
         if (!isEnemy)
         {
