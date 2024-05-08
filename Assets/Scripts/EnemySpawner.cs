@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] List<WaveConfigSO> waveConfigs;
+    [SerializeField] WaveConfigSO waveConfig;
+    [SerializeField] Vector2 spawnBounds = new Vector2(20, 12);
 
     GameManager gameManager;
     PowerUpManager powerUpManager;
 
     int enemyCount = 0;
-    int currentWaveIndex = 0;
-    bool firstWave = true;
+    int currentWaveIndex = 1;
 
     private void Awake()
     {
@@ -28,42 +28,32 @@ public class EnemySpawner : MonoBehaviour
     {
         if (enemyCount == 0)
         {
+            //List of enemy types (currently 1 basic enemy)
+            var enemyList = waveConfig.GetEnemyList();
+            for (int i = 0; i < currentWaveIndex; i++)
+            {
+                Vector3 randomPos = GetRandomPositionInBounds();
+                Instantiate(enemyList[Random.Range(0, enemyList.Count)], transform.position + randomPos, Quaternion.identity);
+            }
 
-            if (!firstWave && currentWaveIndex == 0)
+            if (currentWaveIndex % 2 == 0)
             {
                 powerUpManager.SpawnRandomPowerUp();
             }
 
-            var spawnPoints = waveConfigs[currentWaveIndex].GetEnemySpawnsList();
-            var enemyList = waveConfigs[currentWaveIndex].GetEnemyList();
-
             //set global enemy count tracker
-            gameManager.SetEnemyCount(waveConfigs[currentWaveIndex].GetEnemyCount());
-            enemyCount = waveConfigs[currentWaveIndex].GetEnemyCount();
+            gameManager.SetEnemyCount(currentWaveIndex);
 
-            foreach (var spawn in spawnPoints)
-            {
-                gameManager.IncreaseCurrentWave();
-                foreach (var enemy in enemyList)
-                {
-                    Instantiate(enemy, spawn.transform.position, Quaternion.identity);
-                }
-            }
-
-            //reset the current wave index when we have completed all the waves to start over for now
-            currentWaveIndex = (currentWaveIndex + 1) > waveConfigs.Count - 1 ? 0 : currentWaveIndex + 1;
-
+            currentWaveIndex++;
         }
-
         enemyCount = gameManager.GetEnemyCount();
-        if (firstWave)
-        {
-            firstWave = !firstWave;
-        }
     }
 
-    public int GetWaveCount()
+    Vector2 GetRandomPositionInBounds()
     {
-        return waveConfigs.Count;
+        float randomX = Random.Range(-spawnBounds.x, spawnBounds.x);
+        float randomY = Random.Range(-spawnBounds.y, spawnBounds.y);
+
+        return new Vector2(randomX, randomY);
     }
 }

@@ -17,10 +17,10 @@ public class SpinyMovement : MonoBehaviour
     PowerUpManager powerUpManager;
 
     [Header("Firing Bullet")]
+    [SerializeField] float spreadAngle = 90f;
     bool isFiring = false;
     Coroutine firingCoroutine;
     public Transform firePoint;
-    public float spreadAngle = 90f;
 
     void Awake()
     {
