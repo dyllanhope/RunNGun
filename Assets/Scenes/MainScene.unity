@@ -20248,10 +20248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c81f8d01e82bde4faa4154beea5b9b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveConfigs:
-  - {fileID: 11400000, guid: 6a944f97c9d30414096613b93c1dddd0, type: 2}
-  - {fileID: 11400000, guid: 090ab117042095f4fb1f6da2f4db79bc, type: 2}
-  - {fileID: 11400000, guid: e22ff72fb6192ca4da6adaa8b59b27b4, type: 2}
+  waveConfig: {fileID: 11400000, guid: 6a944f97c9d30414096613b93c1dddd0, type: 2}
+  spawnBounds: {x: 20, y: 12}
 --- !u!1 &1550722720
 GameObject:
   m_ObjectHideFlags: 0
@@ -20602,14 +20600,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1652882076428418094, guid: aa3e1eb02aefc5a45ab226f9ad3ff66d, type: 3}
-      propertyPath: spreadAngle
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1652882076428418094, guid: aa3e1eb02aefc5a45ab226f9ad3ff66d, type: 3}
-      propertyPath: numberOfBullets
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1936723871492660549, guid: aa3e1eb02aefc5a45ab226f9ad3ff66d, type: 3}
       propertyPath: healthSlider
       value: 
