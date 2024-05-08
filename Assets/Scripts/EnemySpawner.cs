@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] WaveConfigSO waveConfig;
     [SerializeField] Vector2 spawnBounds = new Vector2(20, 12);
+    [SerializeField] ParticleSystem spawnParticles;
 
     GameManager gameManager;
     PowerUpManager powerUpManager;
@@ -21,19 +22,19 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        SpawnEnemies();
+        SpawnWave();
     }
 
-    void SpawnEnemies()
+    void SpawnWave()
     {
         if (enemyCount == 0)
         {
             //List of enemy types (currently 1 basic enemy)
-            var enemyList = waveConfig.GetEnemyList();
+            List<GameObject> enemyList = waveConfig.GetEnemyList();
             for (int i = 0; i < currentWaveIndex; i++)
             {
                 Vector3 randomPos = GetRandomPositionInBounds();
-                Instantiate(enemyList[Random.Range(0, enemyList.Count)], transform.position + randomPos, Quaternion.identity);
+                StartCoroutine(SpawnEnemy(enemyList, Random.Range(0, enemyList.Count), randomPos));
             }
 
             if (currentWaveIndex % 2 == 0)
@@ -47,6 +48,15 @@ public class EnemySpawner : MonoBehaviour
             currentWaveIndex++;
         }
         enemyCount = gameManager.GetEnemyCount();
+    }
+
+    IEnumerator SpawnEnemy(List<GameObject> enemyList, int randomIndex, Vector3 randomPos)
+    {
+        var instance = Instantiate(spawnParticles, transform.position + randomPos, Quaternion.identity);
+        instance.Play();
+        yield return new WaitForSeconds(instance.main.duration + instance.main.startLifetime.constantMax);
+        Destroy(instance.gameObject);
+        Instantiate(enemyList[randomIndex], transform.position + randomPos, Quaternion.identity);
     }
 
     Vector2 GetRandomPositionInBounds()

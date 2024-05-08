@@ -20250,6 +20250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveConfig: {fileID: 11400000, guid: 6a944f97c9d30414096613b93c1dddd0, type: 2}
   spawnBounds: {x: 20, y: 12}
+  spawnParticles: {fileID: 4327882199639026779, guid: e729a0a969a735145ae597cb6a9209fa, type: 3}
 --- !u!1 &1550722720
 GameObject:
   m_ObjectHideFlags: 0
