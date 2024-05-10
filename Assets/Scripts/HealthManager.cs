@@ -23,10 +23,12 @@ public class HealthManager : MonoBehaviour
     CinemachineImpulseSource impulseSource;
 
     GameManager gameManager;
+    LevelManager levelManager;
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        levelManager = FindObjectOfType<LevelManager>();
     }
     private void Start()
     {
@@ -65,6 +67,7 @@ public class HealthManager : MonoBehaviour
         else
         {
             impulseSource.GenerateImpulse(1);
+            levelManager.LoadGameOverScene();
         }
         Destroy(gameObject);
     }
