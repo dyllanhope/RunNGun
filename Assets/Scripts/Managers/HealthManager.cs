@@ -24,11 +24,13 @@ public class HealthManager : MonoBehaviour
 
     GameManager gameManager;
     LevelManager levelManager;
+    ScoreKeeper scoreKeeper;
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         levelManager = FindObjectOfType<LevelManager>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
     private void Start()
     {
@@ -61,7 +63,7 @@ public class HealthManager : MonoBehaviour
         if (isEnemy)
         {
             gameManager.KillEnemy();
-            gameManager.IncreaseScore(points);
+            scoreKeeper.IncreaseScore(points);
             PlayDeathParticles();
         }
         else
